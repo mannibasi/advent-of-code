@@ -43,4 +43,23 @@ public class SimilarityCalculatorTests {
 
         assertEquals(4, similarityScore);
     }
+
+    @Test
+    public void testSimilarityScoreForItemThatAppearsInListTwoTwice() {
+        List<Integer> locationIdListOne = new ArrayList<>();
+        locationIdListOne.add(3);
+        locationIdListOne.add(7);
+
+        List<Integer> locationIdListTwo = new ArrayList<>();
+        locationIdListTwo.add(4);
+        locationIdListTwo.add(7);
+        locationIdListTwo.add(9);
+        locationIdListTwo.add(7);
+
+        SimilarityCalculator calculator = new SimilarityCalculator(locationIdListOne, locationIdListTwo);
+
+        int similarityScore = calculator.calculate();
+
+        assertEquals(14, similarityScore);
+    }
 }
