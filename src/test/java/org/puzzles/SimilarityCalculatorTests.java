@@ -62,4 +62,29 @@ public class SimilarityCalculatorTests {
 
         assertEquals(14, similarityScore);
     }
+
+    @Test
+    public void testSimilarityScoreWithExampleLists() {
+        List<Integer> locationIdListOne = new ArrayList<>();
+        locationIdListOne.add(3);
+        locationIdListOne.add(4);
+        locationIdListOne.add(2);
+        locationIdListOne.add(1);
+        locationIdListOne.add(3);
+        locationIdListOne.add(3);
+
+        List<Integer> locationIdListTwo = new ArrayList<>();
+        locationIdListTwo.add(4);
+        locationIdListTwo.add(3);
+        locationIdListTwo.add(5);
+        locationIdListTwo.add(3);
+        locationIdListTwo.add(9);
+        locationIdListTwo.add(3);
+
+        SimilarityCalculator calculator = new SimilarityCalculator(locationIdListOne, locationIdListTwo);
+
+        int similarityScore = calculator.calculate();
+
+        assertEquals(31, similarityScore);
+    }
 }
