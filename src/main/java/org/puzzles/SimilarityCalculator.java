@@ -15,7 +15,7 @@ public class SimilarityCalculator {
         int similarityScore = 0;
         for (Integer listOneLocationId : locationIdListOne) {
             if (locationIdListTwo.contains(listOneLocationId)) {
-                similarityScore += listOneLocationId * numberOfOccurrences(listOneLocationId);
+                similarityScore += (listOneLocationId * numberOfOccurrences(listOneLocationId));
             }
         }
         return similarityScore;
