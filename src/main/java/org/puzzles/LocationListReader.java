@@ -9,15 +9,15 @@ import java.util.List;
 import static java.lang.Integer.parseInt;
 
 public class LocationListReader {
-    private final ArrayList<Integer> locationListOne = new ArrayList<>();
-    private final ArrayList<Integer> locationListTwo = new ArrayList<>();
+    private final List<Integer> locationListOne = new ArrayList<>();
+    private final List<Integer> locationListTwo = new ArrayList<>();
 
     public LocationListReader(String filePath) {
         List<String> lines;
         try {
             lines = Files.readAllLines(Path.of(filePath));
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Error reading file: " + filePath, e);
         }
 
         for (String line : lines) {
@@ -27,9 +27,9 @@ public class LocationListReader {
         }
     }
 
-    public ArrayList<Integer> readListOne() {
+    public List<Integer> readListOne() {
         return locationListOne;
     }
 
-    public ArrayList<Integer> readListTwo() { return locationListTwo; }
+    public List<Integer> readListTwo() { return locationListTwo; }
 }

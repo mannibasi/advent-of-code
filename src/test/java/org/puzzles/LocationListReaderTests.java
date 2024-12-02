@@ -2,7 +2,7 @@ package org.puzzles;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -11,7 +11,7 @@ public class LocationListReaderTests {
     @Test
     public void testReadLocationListOne() {
         LocationListReader reader = new LocationListReader("src/test/resources/day_1_test_puzzle_input");
-        ArrayList<Integer> listOne = reader.readListOne();
+        List<Integer> listOne = reader.readListOne();
         assertAll(
                 () -> assertEquals(37033, listOne.get(0)),
                 () -> assertEquals(80098, listOne.get(1)),
@@ -22,7 +22,7 @@ public class LocationListReaderTests {
     @Test
     public void testReadLocationListTwo() {
         LocationListReader reader = new LocationListReader("src/test/resources/day_1_test_puzzle_input");
-        ArrayList<Integer> listTwo = reader.readListTwo();
+        List<Integer> listTwo = reader.readListTwo();
         assertAll(
                 () -> assertEquals(48086, listTwo.get(0)),
                 () -> assertEquals(34930, listTwo.get(1)),
