@@ -13,6 +13,10 @@ public class DistanceCalculator {
     }
 
     public int calculate() {
-        return locationIdListTwo.getFirst() - locationIdListOne.getFirst();
+        int totalDistance = 0;
+        for (int i = 0; i < locationIdListOne.size(); i++) {
+            totalDistance += (locationIdListTwo.get(i) - locationIdListOne.get(i));
+        }
+        return totalDistance;
     }
 }
