@@ -1,5 +1,6 @@
 package org.puzzles;
 
+import java.util.Collections;
 import java.util.List;
 
 public class DistanceCalculator {
@@ -10,12 +11,15 @@ public class DistanceCalculator {
     public DistanceCalculator(List<Integer> locationIdListOne, List<Integer> locationIdListTwo) {
         this.locationIdListOne = locationIdListOne;
         this.locationIdListTwo = locationIdListTwo;
+
+        Collections.sort(this.locationIdListOne);
+        Collections.sort(this.locationIdListTwo);
     }
 
     public int calculate() {
         int totalDistance = 0;
         for (int i = 0; i < locationIdListOne.size(); i++) {
-            totalDistance += (locationIdListTwo.get(i) - locationIdListOne.get(i));
+            totalDistance += Math.abs(locationIdListTwo.get(i) - locationIdListOne.get(i));
         }
         return totalDistance;
     }
