@@ -6,5 +6,9 @@ public class Main {
         DistanceCalculator calculator = new DistanceCalculator(reader.readListOne(), reader.readListTwo());
         int distance = calculator.calculate();
         System.out.println("Total distance: " + distance); //1223326
+
+        SimilarityCalculator similarityCalculator = new SimilarityCalculator(reader.readListOne(), reader.readListTwo());
+        int similarityScore = similarityCalculator.calculate();
+        System.out.println("Similarity score: " + similarityScore); //21070419
     }
 }
