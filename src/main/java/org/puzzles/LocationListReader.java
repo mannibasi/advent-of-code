@@ -10,6 +10,7 @@ import static java.lang.Integer.parseInt;
 
 public class LocationListReader {
     private final ArrayList<Integer> locationListOne = new ArrayList<>();
+    private final ArrayList<Integer> locationListTwo = new ArrayList<>();
 
     public LocationListReader(String filePath) {
         List<String> lines;
@@ -22,10 +23,13 @@ public class LocationListReader {
         for (String line : lines) {
             String[] parts = line.split("\\s+");
             locationListOne.add(parseInt(parts[0]));
+            locationListTwo.add(parseInt(parts[1]));
         }
     }
 
     public ArrayList<Integer> readListOne() {
         return locationListOne;
     }
+
+    public ArrayList<Integer> readListTwo() { return locationListTwo; }
 }
