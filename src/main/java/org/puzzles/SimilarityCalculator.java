@@ -15,10 +15,20 @@ public class SimilarityCalculator {
         int similarityScore = 0;
         for (Integer listOneLocationId : locationIdListOne) {
             if (locationIdListTwo.contains(listOneLocationId)) {
-                similarityScore += listOneLocationId;
+                similarityScore += listOneLocationId * numberOfOccurrences(listOneLocationId);
             }
         }
         return similarityScore;
+    }
+
+    private Integer numberOfOccurrences(Integer listOneLocationId) {
+        int count = 0;
+        for (Integer listTwoLocationId : locationIdListTwo) {
+            if (listTwoLocationId.equals(listOneLocationId)) {
+                count++;
+            }
+        }
+        return count;
     }
 
 }
