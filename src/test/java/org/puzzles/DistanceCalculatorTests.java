@@ -36,4 +36,28 @@ public class DistanceCalculatorTests {
 
         assertEquals(4, distance);
     }
+
+    @Test
+    public void testTotalDistanceCalculationWithExampleLists() {
+        List<Integer> locationIdListOne = new ArrayList<>();
+        locationIdListOne.add(3);
+        locationIdListOne.add(4);
+        locationIdListOne.add(2);
+        locationIdListOne.add(1);
+        locationIdListOne.add(3);
+        locationIdListOne.add(3);
+
+        List<Integer> locationIdListTwo = new ArrayList<>();
+        locationIdListTwo.add(4);
+        locationIdListTwo.add(3);
+        locationIdListTwo.add(5);
+        locationIdListTwo.add(3);
+        locationIdListTwo.add(9);
+        locationIdListTwo.add(3);
+
+        DistanceCalculator calculator = new DistanceCalculator(locationIdListOne, locationIdListTwo);
+        int distance = calculator.calculate();
+
+        assertEquals(11, distance);
+    }
 }
