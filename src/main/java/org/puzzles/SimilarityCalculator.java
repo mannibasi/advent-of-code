@@ -14,13 +14,10 @@ public class SimilarityCalculator {
     }
 
     public int calculate() {
-        int similarityScore = 0;
-        for (Integer id : locationIdListOne) {
-            if (locationIdListTwoOccurrencesMap.containsKey(id)) {
-                similarityScore += id * locationIdListTwoOccurrencesMap.get(id);
-            }
-        }
-        return similarityScore;
+        return locationIdListOne.stream()
+                .filter(locationIdListTwoOccurrencesMap::containsKey)
+                .mapToInt(id -> id * locationIdListTwoOccurrencesMap.get(id))
+                .sum();
     }
 
     private Map<Integer, Integer> buildOccurrencesMap(List<Integer> list) {
