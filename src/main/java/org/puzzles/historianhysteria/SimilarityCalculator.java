@@ -1,4 +1,4 @@
-package org.puzzles;
+package org.puzzles.historianhysteria;
 
 import java.util.HashMap;
 import java.util.List;

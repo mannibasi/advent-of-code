@@ -1,4 +1,4 @@
-package org.puzzles;
+package org.puzzles.historianhysteria;
 
 import java.io.IOException;
 import java.nio.file.Files;

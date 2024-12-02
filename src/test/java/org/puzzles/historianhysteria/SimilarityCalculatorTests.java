@@ -1,4 +1,4 @@
-package org.puzzles;
+package org.puzzles.historianhysteria;
 
 import org.junit.jupiter.api.Test;
 

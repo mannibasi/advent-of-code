@@ -1,4 +1,4 @@
-package org.puzzles;
+package org.puzzles.historianhysteria;
 
 import org.junit.jupiter.api.Test;
 
@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class LocationListReaderTests {
     @Test
     public void testReadLocationListOne() {
-        LocationListReader reader = new LocationListReader("src/test/resources/day_1_test_puzzle_input");
+        LocationListReader reader = new LocationListReader("src/test/resources/org/puzzles/historianhysteria/day_1_test_puzzle_input");
         List<Integer> listOne = reader.readListOne();
         assertAll(
                 () -> assertEquals(37033, listOne.get(0)),
@@ -21,7 +21,7 @@ public class LocationListReaderTests {
 
     @Test
     public void testReadLocationListTwo() {
-        LocationListReader reader = new LocationListReader("src/test/resources/day_1_test_puzzle_input");
+        LocationListReader reader = new LocationListReader("src/test/resources/org/puzzles/historianhysteria/day_1_test_puzzle_input");
         List<Integer> listTwo = reader.readListTwo();
         assertAll(
                 () -> assertEquals(48086, listTwo.get(0)),
