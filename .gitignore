@@ -1,3 +1,8 @@
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
 # Compiled class file
 *.class
 
@@ -10,9 +15,6 @@
 # IntelliJ IDEA files
 *.iml
 .idea/
-
-# VS Code files
-.vscode/
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
