@@ -18,4 +18,15 @@ public class LocationListReaderTests {
                 () -> assertEquals(88073, listOne.get(2))
         );
     }
+
+    @Test
+    public void testReadLocationListTwo() {
+        LocationListReader reader = new LocationListReader("src/test/resources/day_1_test_puzzle_input");
+        ArrayList<Integer> listTwo = reader.readListTwo();
+        assertAll(
+                () -> assertEquals(48086, listTwo.get(0)),
+                () -> assertEquals(34930, listTwo.get(1)),
+                () -> assertEquals(69183, listTwo.get(2))
+        );
+    }
 }
