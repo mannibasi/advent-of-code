@@ -47,6 +47,13 @@ public class ReportTests {
     }
 
     @Test
+    public void testUnsafeReportWithValuesIncreasingAndDecreasingUnaffectedByDampener(){
+        List<Integer> reportLevels = List.of(1, 3, 2, 4, 3);
+        SafetyProcessor safetyProcessor = new SafetyProcessor(reportLevels);
+        assertFalse(safetyProcessor.isSafe());
+    }
+
+    @Test
     public void testUnsafeReportWithValuesIncreasingByValueGreaterThanThree(){
         List<Integer> reportLevels = List.of(1, 2, 7, 8, 9);
         SafetyProcessor safetyProcessor = new SafetyProcessor(reportLevels);
