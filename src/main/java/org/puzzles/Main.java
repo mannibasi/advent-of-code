@@ -27,7 +27,6 @@ public class Main {
             }
         }
         System.out.println("Safe report count: " + safeReportCount); //486
-
     }
 
     private static void historianHysteria() {

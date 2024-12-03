@@ -61,9 +61,62 @@ public class ReportTests {
     }
 
     @Test
-    public void testUnsafeReportWithValuesIncreasingByValueLessThanOne(){
+    public void testSafeReportWithValuesIncreasingByValueLessThanOneAffectedByDampener(){
         List<Integer> reportLevels = List.of(8, 6, 4, 4, 1);
         SafetyProcessor safetyProcessor = new SafetyProcessor(reportLevels);
+        assertTrue(safetyProcessor.isSafe());
+    }
+
+    @Test
+    public void testUnsafeReportWithValuesIncreasingByValueLessThanOneUnaffectedByDampener(){
+        List<Integer> reportLevels = List.of(8, 6, 6, 4, 4, 1);
+        SafetyProcessor safetyProcessor = new SafetyProcessor(reportLevels);
         assertFalse(safetyProcessor.isSafe());
+    }
+
+    @Test
+    public void testExampleOne() {
+        List<Integer> reportLevels = List.of(7, 6, 4, 2, 1);
+        SafetyProcessor safetyProcessor = new SafetyProcessor(reportLevels);
+        assertTrue(safetyProcessor.isSafe());
+    }
+
+    @Test
+    public void testExampleTwo() {
+        List<Integer> reportLevels = List.of(1, 2, 7, 8, 9);
+        SafetyProcessor safetyProcessor = new SafetyProcessor(reportLevels);
+        assertFalse(safetyProcessor.isSafe());
+    }
+
+
+    @Test
+    public void testExampleThree() {
+        List<Integer> reportLevels = List.of(1, 2, 7, 8, 9);
+        SafetyProcessor safetyProcessor = new SafetyProcessor(reportLevels);
+        assertFalse(safetyProcessor.isSafe());
+    }
+
+
+    @Test
+    public void testExampleFour() {
+        List<Integer> reportLevels = List.of(1, 3, 2, 4, 5);
+        SafetyProcessor safetyProcessor = new SafetyProcessor(reportLevels);
+        assertTrue(safetyProcessor.isSafe());
+    }
+
+
+    @Test
+    public void testExampleFive() {
+        List<Integer> reportLevels = List.of(8, 6, 4, 4, 1);
+        SafetyProcessor safetyProcessor = new SafetyProcessor(reportLevels);
+        assertTrue(safetyProcessor.isSafe());
+    }
+
+
+    @Test
+    public void testExampleSix() {
+        List<Integer> reportLevels = List.of(1, 3, 6, 7, 9);
+        SafetyProcessor safetyProcessor = new SafetyProcessor(reportLevels);
+        assertTrue(safetyProcessor.isSafe());
     }
 }
