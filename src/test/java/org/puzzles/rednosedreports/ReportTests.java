@@ -40,10 +40,10 @@ public class ReportTests {
     }
 
     @Test
-    public void testUnsafeReportWithValuesIncreasingAndDecreasing(){
+    public void testSafeReportWithValuesIncreasingAndDecreasingAffectedByDampener(){
         List<Integer> reportLevels = List.of(1, 3, 2, 4, 5);
         SafetyProcessor safetyProcessor = new SafetyProcessor(reportLevels);
-        assertFalse(safetyProcessor.isSafe());
+        assertTrue(safetyProcessor.isSafe());
     }
 
     @Test
