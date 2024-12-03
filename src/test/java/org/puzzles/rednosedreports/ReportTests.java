@@ -26,9 +26,23 @@ public class ReportTests {
     }
 
     @Test
-    public void testSafeReportWithAllLevelsDecreasingByOneOrTwo() {
+    public void testSafeReportWithAllLevelsDecreasing() {
         List<Integer> reportLevels = List.of(7, 6, 4, 2, 1);
         SafetyProcessor safetyProcessor = new SafetyProcessor(reportLevels);
         assertTrue(safetyProcessor.isSafe());
+    }
+
+    @Test
+    public void testSafeReportWithAllLevelsIncreasing() {
+        List<Integer> reportLevels = List.of(1, 3, 6, 7, 9);
+        SafetyProcessor safetyProcessor = new SafetyProcessor(reportLevels);
+        assertTrue(safetyProcessor.isSafe());
+    }
+
+    @Test
+    public void testUnsafeReportWithValuesIncreasingAndDecreasing(){
+        List<Integer> reportLevels = List.of(1, 3, 2, 4, 5);
+        SafetyProcessor safetyProcessor = new SafetyProcessor(reportLevels);
+        assertFalse(safetyProcessor.isSafe());
     }
 }
