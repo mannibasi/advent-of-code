@@ -25,4 +25,11 @@ public class ReportTests {
         List<Integer> levels = processor.readLevels();
         assertEquals(List.of(40, 42, 44, 47, 49, 50, 48), levels);
     }
+
+    @Test
+    public void testSafeReportWithAllLevelsDecreasingByOneOrTwo() {
+        List<Integer> reportLevels = List.of(7, 6, 4, 2, 1);
+        SafetyProcessor safetyProcessor = new SafetyProcessor(reportLevels);
+        assertTrue(safetyProcessor.isSafe());
+    }
 }
