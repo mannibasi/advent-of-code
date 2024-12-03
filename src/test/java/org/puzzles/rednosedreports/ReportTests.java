@@ -45,4 +45,11 @@ public class ReportTests {
         SafetyProcessor safetyProcessor = new SafetyProcessor(reportLevels);
         assertFalse(safetyProcessor.isSafe());
     }
+
+    @Test
+    public void testUnsafeReportWithValuesIncreasingByValueGreaterThanThree(){
+        List<Integer> reportLevels = List.of(1, 2, 7, 8, 9);
+        SafetyProcessor safetyProcessor = new SafetyProcessor(reportLevels);
+        assertFalse(safetyProcessor.isSafe());
+    }
 }
