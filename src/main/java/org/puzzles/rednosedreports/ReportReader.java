@@ -17,7 +17,7 @@ public class ReportReader {
         }
     }
 
-    public List<String> readReportLines() {
+    public List<String> readReports() {
         return lines;
     }
 }
