@@ -17,19 +17,25 @@ public class SafetyProcessor {
     }
 
     private boolean allIncreasingOrDecreasing() {
-        boolean increasing = true;
-        boolean decreasing = true;
+        return allIncreasing() || allDecreasing();
+    }
 
+    private boolean allIncreasing() {
         for (int i = 1; i < levelReadings.size(); i++) {
-            if (levelReadings.get(i) >= levelReadings.get(i - 1)) {
-                decreasing = false;
-            }
             if (levelReadings.get(i) <= levelReadings.get(i - 1)) {
-                increasing = false;
+                return false;
             }
         }
+        return true;
+    }
 
-        return increasing || decreasing;
+    private boolean allDecreasing() {
+        for (int i = 1; i < levelReadings.size(); i++) {
+            if (levelReadings.get(i) >= levelReadings.get(i - 1)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     private boolean adjacentValuesDifferByMoreThanThree() {
