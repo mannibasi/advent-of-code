@@ -18,4 +18,11 @@ public class ReportTests {
                 () -> assertEquals("74 76 78 81 83 85 87 91", reports.get(2))
         );
     }
+
+    @Test
+    public void testReportDataProcessing() {
+        ReportProcessor processor = new ReportProcessor("40 42 44 47 49 50 48");
+        List<Integer> levels = processor.readLevels();
+        assertEquals(List.of(40, 42, 44, 47, 49, 50, 48), levels);
+    }
 }
