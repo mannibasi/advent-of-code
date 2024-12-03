@@ -1,8 +1,11 @@
 package org.puzzles.rednosedreports;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.List;
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -88,14 +91,12 @@ public class ReportTests {
         assertFalse(safetyProcessor.isSafe());
     }
 
-
     @Test
     public void testExampleThree() {
         List<Integer> reportLevels = List.of(1, 2, 7, 8, 9);
         SafetyProcessor safetyProcessor = new SafetyProcessor(reportLevels);
         assertFalse(safetyProcessor.isSafe());
     }
-
 
     @Test
     public void testExampleFour() {
@@ -118,5 +119,27 @@ public class ReportTests {
         List<Integer> reportLevels = List.of(1, 3, 6, 7, 9);
         SafetyProcessor safetyProcessor = new SafetyProcessor(reportLevels);
         assertTrue(safetyProcessor.isSafe());
+    }
+
+    @ParameterizedTest
+    @MethodSource("provideReportLevels")
+    public void testSafeEdgeCaseExamples(List<Integer> reportLevels) {
+        SafetyProcessor safetyProcessor = new SafetyProcessor(reportLevels);
+        assertTrue(safetyProcessor.isSafe());
+    }
+
+    static Stream<List<Integer>> provideReportLevels() {
+        return Stream.of(
+                List.of(48, 46, 47, 49, 51, 54, 56),
+                List.of(1, 1, 2, 3, 4, 5),
+                List.of(1, 2, 3, 4, 5, 5),
+                List.of(5, 1, 2, 3, 4, 5),
+                List.of(1, 4, 3, 2, 1),
+                List.of(1, 6, 7, 8, 9),
+                List.of(1, 2, 3, 4, 3),
+                List.of(9, 8, 7, 6, 7),
+                List.of(7, 10, 8, 10, 11),
+                List.of(29, 28, 27, 25, 26, 22, 20)
+                );
     }
 }
