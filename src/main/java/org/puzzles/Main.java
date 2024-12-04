@@ -21,8 +21,8 @@ public class Main {
         int safeReportCount = 0;
         for (String report : reports) {
             ReportProcessor processor = new ReportProcessor(report);
-            SafetyProcessor safetyProcessor = new SafetyProcessor(processor.readLevels());
-            if(safetyProcessor.isSafe()) {
+            SafetyProcessor safetyProcessor = new SafetyProcessor();
+            if(safetyProcessor.isSafe(processor.readLevels())) {
                 safeReportCount++;
             }
         }

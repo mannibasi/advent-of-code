@@ -3,24 +3,18 @@ package org.puzzles.rednosedreports;
 import java.util.List;
 
 public class SafetyProcessor {
-    private final List<Integer> levelReadings;
+    public SafetyProcessor() {
 
-    public SafetyProcessor(List<Integer> levelReadings) {
-        this.levelReadings = levelReadings;
     }
 
-    public boolean isSafe() {
-        if (adjacentValuesDifferByMoreThanThree()) {
+    public boolean isSafe(List<Integer> levelReadings) {
+        if (adjacentValuesDifferByMoreThanThree(levelReadings)) {
             return false;
         }
-        return allIncreasingOrDecreasing();
+        return allIncreasing(levelReadings) || allDecreasing(levelReadings);
     }
 
-    private boolean allIncreasingOrDecreasing() {
-        return allIncreasing() || allDecreasing();
-    }
-
-    private boolean allIncreasing() {
+    private boolean allIncreasing(List<Integer> levelReadings) {
         for (int i = 1; i < levelReadings.size(); i++) {
             if (levelReadings.get(i) <= levelReadings.get(i - 1)) {
                 return false;
@@ -29,7 +23,7 @@ public class SafetyProcessor {
         return true;
     }
 
-    private boolean allDecreasing() {
+    private boolean allDecreasing(List<Integer> levelReadings) {
         for (int i = 1; i < levelReadings.size(); i++) {
             if (levelReadings.get(i) >= levelReadings.get(i - 1)) {
                 return false;
@@ -38,7 +32,7 @@ public class SafetyProcessor {
         return true;
     }
 
-    private boolean adjacentValuesDifferByMoreThanThree() {
+    private boolean adjacentValuesDifferByMoreThanThree(List<Integer> levelReadings) {
         for (int i = 1; i < levelReadings.size(); i++) {
             if (Math.abs(levelReadings.get(i) - levelReadings.get(i - 1)) > 3) {
                 return true;
