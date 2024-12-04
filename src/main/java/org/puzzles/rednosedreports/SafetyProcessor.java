@@ -3,9 +3,9 @@ package org.puzzles.rednosedreports;
 import java.util.List;
 
 public class SafetyProcessor {
-    public SafetyProcessor() {
+    private boolean dampenerUsed = false;
 
-    }
+    public SafetyProcessor() { }
 
     public boolean isSafe(List<Integer> levelReadings) {
         if (adjacentValuesDifferByMoreThanThree(levelReadings)) {
@@ -17,7 +17,11 @@ public class SafetyProcessor {
     private boolean allIncreasing(List<Integer> levelReadings) {
         for (int i = 1; i < levelReadings.size(); i++) {
             if (levelReadings.get(i) <= levelReadings.get(i - 1)) {
-                return false;
+                if (dampenerUsed) {
+                    return false;
+                } else {
+                    dampenerUsed = true;
+                }
             }
         }
         return true;
@@ -26,7 +30,11 @@ public class SafetyProcessor {
     private boolean allDecreasing(List<Integer> levelReadings) {
         for (int i = 1; i < levelReadings.size(); i++) {
             if (levelReadings.get(i) >= levelReadings.get(i - 1)) {
-                return false;
+                if (dampenerUsed) {
+                    return false;
+                } else {
+                    dampenerUsed = true;
+                }
             }
         }
         return true;
@@ -35,7 +43,11 @@ public class SafetyProcessor {
     private boolean adjacentValuesDifferByMoreThanThree(List<Integer> levelReadings) {
         for (int i = 1; i < levelReadings.size(); i++) {
             if (Math.abs(levelReadings.get(i) - levelReadings.get(i - 1)) > 3) {
-                return true;
+                if (dampenerUsed) {
+                    return true;
+                } else {
+                    dampenerUsed = true;
+                }
             }
         }
         return false;
