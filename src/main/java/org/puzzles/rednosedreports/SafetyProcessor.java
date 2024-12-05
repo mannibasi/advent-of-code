@@ -1,5 +1,6 @@
 package org.puzzles.rednosedreports;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SafetyProcessor {
@@ -11,7 +12,25 @@ public class SafetyProcessor {
         if (adjacentValuesDifferByMoreThanThree(levelReadings)) {
             return false;
         }
-        return allIncreasing(levelReadings) || allDecreasing(levelReadings);
+
+        if (mostlyIncreasing(levelReadings)) {
+            return allIncreasing(levelReadings);
+        }
+
+        return allDecreasing(levelReadings);
+    }
+
+    private boolean mostlyIncreasing(List<Integer> levelReadings) {
+        int increasingCount = 0;
+        int decreasingCount = 0;
+        for (int i = 1; i < levelReadings.size(); i++) {
+            if (levelReadings.get(i) > levelReadings.get(i - 1)) {
+                increasingCount++;
+            } else if (levelReadings.get(i) < levelReadings.get(i - 1)) {
+                decreasingCount++;
+            }
+        }
+        return increasingCount >= decreasingCount;
     }
 
     private boolean allIncreasing(List<Integer> levelReadings) {
@@ -21,6 +40,7 @@ public class SafetyProcessor {
                     return false;
                 } else {
                     dampenerUsed = true;
+                    return dampenedSafetyCheck(levelReadings, i);
                 }
             }
         }
@@ -34,6 +54,7 @@ public class SafetyProcessor {
                     return false;
                 } else {
                     dampenerUsed = true;
+                    return dampenedSafetyCheck(levelReadings, i);
                 }
             }
         }
@@ -47,9 +68,28 @@ public class SafetyProcessor {
                     return true;
                 } else {
                     dampenerUsed = true;
+                    return dampenedSafetyCheck(levelReadings, i);
                 }
             }
         }
         return false;
+    }
+
+    private boolean dampenedSafetyCheck(List<Integer> levelReadings, int i) {
+        if (i >= 1) {
+            List<Integer> listWithPreviousItemRemoved = new ArrayList<>(levelReadings);
+            listWithPreviousItemRemoved.remove(i - 1);
+            if (isSafe(listWithPreviousItemRemoved)) return true;
+        }
+
+        if (levelReadings.size() > i + 1) {
+            List<Integer> listWithNextItemRemoved = new ArrayList<>(levelReadings);
+            listWithNextItemRemoved.remove(i + 1);
+            return isSafe(listWithNextItemRemoved);
+        }
+
+        List<Integer> listWithCurrentItemRemoved = new ArrayList<>(levelReadings);
+        listWithCurrentItemRemoved.remove(i);
+        return isSafe(listWithCurrentItemRemoved);
     }
 }
