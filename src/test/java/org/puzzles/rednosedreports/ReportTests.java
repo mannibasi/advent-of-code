@@ -31,50 +31,50 @@ public class ReportTests {
     @Test
     public void testSafeReportWithAllLevelsDecreasing() {
         List<Integer> reportLevels = List.of(7, 6, 4, 2, 1);
-        SafetyProcessor safetyProcessor = new SafetyProcessor();
-        assertTrue(safetyProcessor.isSafe(reportLevels));
+        SafetyProcessor safetyProcessor = new SafetyProcessor(reportLevels);
+        assertTrue(safetyProcessor.isSafe());
     }
 
     @Test
     public void testSafeReportWithAllLevelsIncreasing() {
         List<Integer> reportLevels = List.of(1, 3, 6, 7, 9);
-        SafetyProcessor safetyProcessor = new SafetyProcessor();
-        assertTrue(safetyProcessor.isSafe(reportLevels));
+        SafetyProcessor safetyProcessor = new SafetyProcessor(reportLevels);
+        assertTrue(safetyProcessor.isSafe());
     }
 
     @Test
     public void testSafeReportWithValuesIncreasingAndDecreasingAffectedByDampener(){
         List<Integer> reportLevels = List.of(1, 3, 2, 4, 5);
-        SafetyProcessor safetyProcessor = new SafetyProcessor();
-        assertTrue(safetyProcessor.isSafe(reportLevels));
+        SafetyProcessor safetyProcessor = new SafetyProcessor(reportLevels);
+        assertTrue(safetyProcessor.isSafe());
     }
 
     @Test
     public void testUnsafeReportWithValuesIncreasingAndDecreasingUnaffectedByDampener(){
         List<Integer> reportLevels = List.of(1, 3, 2, 4, 3);
-        SafetyProcessor safetyProcessor = new SafetyProcessor();
-        assertFalse(safetyProcessor.isSafe(reportLevels));
+        SafetyProcessor safetyProcessor = new SafetyProcessor(reportLevels);
+        assertFalse(safetyProcessor.isSafe());
     }
 
     @Test
-    public void testUnsafeReportWithValuesIncreasingByValueGreaterThanThree(){
+    public void testUnsafeReportWithValuesIncreasingByValueGreaterThanThreeUnaffectedByDampener(){
         List<Integer> reportLevels = List.of(1, 2, 7, 8, 9);
-        SafetyProcessor safetyProcessor = new SafetyProcessor();
-        assertTrue(safetyProcessor.isSafe(reportLevels));
+        SafetyProcessor safetyProcessor = new SafetyProcessor(reportLevels);
+        assertFalse(safetyProcessor.isSafe());
     }
 
     @Test
     public void testSafeReportWithValuesIncreasingByValueLessThanOneAffectedByDampener(){
         List<Integer> reportLevels = List.of(8, 6, 4, 4, 1);
-        SafetyProcessor safetyProcessor = new SafetyProcessor();
-        assertTrue(safetyProcessor.isSafe(reportLevels));
+        SafetyProcessor safetyProcessor = new SafetyProcessor(reportLevels);
+        assertTrue(safetyProcessor.isSafe());
     }
 
     @ParameterizedTest
     @MethodSource("provideReportLevels")
     public void testSafeEdgeCaseExamples(List<Integer> reportLevels) {
-        SafetyProcessor safetyProcessor = new SafetyProcessor();
-        assertTrue(safetyProcessor.isSafe(reportLevels));
+        SafetyProcessor safetyProcessor = new SafetyProcessor(reportLevels);
+        assertTrue(safetyProcessor.isSafe());
     }
 
     static Stream<List<Integer>> provideReportLevels() {

@@ -4,23 +4,34 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SafetyProcessor {
+    private List<Integer> levelReadings;
     private boolean dampenerUsed = false;
 
-    public SafetyProcessor() { }
-
-    public boolean isSafe(List<Integer> levelReadings) {
-        if (adjacentValuesDifferByMoreThanThree(levelReadings)) {
-            return false;
-        }
-
-        if (mostlyIncreasing(levelReadings)) {
-            return allIncreasing(levelReadings);
-        }
-
-        return allDecreasing(levelReadings);
+    public SafetyProcessor(List<Integer> levelReadings) {
+        this.levelReadings = levelReadings;
     }
 
-    private boolean mostlyIncreasing(List<Integer> levelReadings) {
+    private boolean isSafe(List<Integer> readings) {
+        if (adjacentValuesDifferByThreeOrLess(readings)) {
+            if (mostlyIncreasing()) {
+                return allIncreasing(readings);
+            }
+            return allDecreasing(readings);
+        }
+        return false;
+    }
+
+    public boolean isSafe() {
+        if (adjacentValuesDifferByThreeOrLess(levelReadings)) {
+            if (mostlyIncreasing()) {
+                return allIncreasing(levelReadings);
+            }
+            return allDecreasing(levelReadings);
+        }
+        return false;
+    }
+
+    private boolean mostlyIncreasing() {
         int increasingCount = 0;
         int decreasingCount = 0;
         for (int i = 1; i < levelReadings.size(); i++) {
@@ -33,63 +44,73 @@ public class SafetyProcessor {
         return increasingCount >= decreasingCount;
     }
 
-    private boolean allIncreasing(List<Integer> levelReadings) {
-        for (int i = 1; i < levelReadings.size(); i++) {
-            if (levelReadings.get(i) <= levelReadings.get(i - 1)) {
+    private boolean allIncreasing(List<Integer> readings) {
+        for (int i = 1; i < readings.size(); i++) {
+            if (readings.get(i) <= readings.get(i - 1)) {
                 if (dampenerUsed) {
                     return false;
                 } else {
                     dampenerUsed = true;
-                    return dampenedSafetyCheck(levelReadings, i);
+                    return dampenedSafetyCheck(readings, i);
                 }
             }
         }
         return true;
     }
 
-    private boolean allDecreasing(List<Integer> levelReadings) {
-        for (int i = 1; i < levelReadings.size(); i++) {
-            if (levelReadings.get(i) >= levelReadings.get(i - 1)) {
+    private boolean allDecreasing(List<Integer> readings) {
+        for (int i = 1; i < readings.size(); i++) {
+            if (readings.get(i) >= readings.get(i - 1)) {
                 if (dampenerUsed) {
                     return false;
                 } else {
                     dampenerUsed = true;
-                    return dampenedSafetyCheck(levelReadings, i);
+                    return dampenedSafetyCheck(readings, i);
                 }
             }
         }
         return true;
     }
 
-    private boolean adjacentValuesDifferByMoreThanThree(List<Integer> levelReadings) {
-        for (int i = 1; i < levelReadings.size(); i++) {
-            if (Math.abs(levelReadings.get(i) - levelReadings.get(i - 1)) > 3) {
+    private boolean adjacentValuesDifferByThreeOrLess(List<Integer> readings) {
+        for (int i = 1; i < readings.size(); i++) {
+            if (Math.abs(readings.get(i) - readings.get(i - 1)) > 3) {
                 if (dampenerUsed) {
-                    return true;
+                    return false;
                 } else {
                     dampenerUsed = true;
-                    return dampenedSafetyCheck(levelReadings, i);
+                    return dampenedSafetyCheck(readings, i);
                 }
             }
         }
-        return false;
+        return true;
     }
 
-    private boolean dampenedSafetyCheck(List<Integer> levelReadings, int i) {
+    private boolean dampenedSafetyCheck(List<Integer> readings, int i) {
         if (i >= 1) {
-            List<Integer> listWithPreviousItemRemoved = new ArrayList<>(levelReadings);
+            List<Integer> listWithPreviousItemRemoved = new ArrayList<>(readings);
             listWithPreviousItemRemoved.remove(i - 1);
-            if (isSafe(listWithPreviousItemRemoved)) return true;
+            if (isSafe(listWithPreviousItemRemoved)) {
+                this.levelReadings = listWithPreviousItemRemoved;
+                return true;
+            }
         }
 
-        if (levelReadings.size() > i + 1) {
-            List<Integer> listWithNextItemRemoved = new ArrayList<>(levelReadings);
+        if (readings.size() > i + 1) {
+            List<Integer> listWithNextItemRemoved = new ArrayList<>(readings);
             listWithNextItemRemoved.remove(i + 1);
-            return isSafe(listWithNextItemRemoved);
+            if(isSafe(listWithNextItemRemoved)) {
+                this.levelReadings = listWithNextItemRemoved;
+                return true;
+            };
         }
 
-        List<Integer> listWithCurrentItemRemoved = new ArrayList<>(levelReadings);
+        List<Integer> listWithCurrentItemRemoved = new ArrayList<>(readings);
         listWithCurrentItemRemoved.remove(i);
-        return isSafe(listWithCurrentItemRemoved);
+        if(isSafe(listWithCurrentItemRemoved)) {
+            this.levelReadings = listWithCurrentItemRemoved;
+            return true;
+        };
+        return false;
     }
 }
