@@ -28,4 +28,16 @@ public class WordSearchSolverTests {
         WordSearchSolver wordSearchSolver = new WordSearchSolver(board);
         assertEquals(1, wordSearchSolver.find("XMAS"));
     }
+
+    @Test
+    public void testWordFoundInFirstColumn() {
+        char[][] board = {
+                {'X', 'A', 'A', 'X'},
+                {'M', 'F', 'C', 'S'},
+                {'A', 'X', 'A', 'I'},
+                {'S', 'S', 'E', 'O'}
+        };
+        WordSearchSolver wordSearchSolver = new WordSearchSolver(board);
+        assertEquals(1, wordSearchSolver.find("XMAS"));
+    }
 }
