@@ -13,10 +13,8 @@ public class CorruptedInstructionProcessor {
     }
 
     public List<String> getMultiplicationInstructions() {
-        String regex = "mul\\(\\d+,\\d+\\)";
         List<String> matches = new ArrayList<>();
-        Pattern pattern = Pattern.compile(regex);
-        Matcher matcher = pattern.matcher(corruptedInstructions);
+        Matcher matcher = Pattern.compile("mul\\(\\d+,\\d+\\)").matcher(corruptedInstructions);
         int lastEnabledInstructionIndex = 0;
         while (matcher.find()) {
             if(isInstructionEnabled(lastEnabledInstructionIndex, matcher.start())) {
