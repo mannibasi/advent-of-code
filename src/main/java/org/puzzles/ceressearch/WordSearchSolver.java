@@ -26,14 +26,18 @@ public class WordSearchSolver {
     }
 
     private boolean foundAcross(int row, int col, String word) {
-        StringBuilder sb = new StringBuilder();
+        StringBuilder forward = new StringBuilder();
+        StringBuilder backward = new StringBuilder();
         for (int i = 0; i < word.length(); i++) {
-            if (col + i >= board[row].length) {
-                return false;
+            if (col + i < board[row].length) {
+                forward.append(board[row][col + i]);
             }
-            sb.append(board[row][col + i]);
+            if (col - i >= 0) {
+                backward.append(board[row][col - i]);
+            }
         }
-        return sb.toString().equals(word);
+        return forward.toString().equals(word) || forward.reverse().toString().equals(word)
+                || backward.toString().equals(word) || backward.reverse().toString().equals(word);
     }
 
     private boolean foundDiagonal(int row, int col, String word) {
