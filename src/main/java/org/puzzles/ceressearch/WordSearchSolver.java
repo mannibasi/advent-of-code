@@ -45,6 +45,17 @@ public class WordSearchSolver {
     }
 
     private boolean foundDown(int row, int col, String word) {
-        return false;
+        StringBuilder forward = new StringBuilder();
+        StringBuilder backward = new StringBuilder();
+        for (int i = 0; i < word.length(); i++) {
+            if (row + i < board[col].length) {
+                forward.append(board[row + i][col]);
+            }
+            if (row - i >= 0) {
+                backward.append(board[row - i][col]);
+            }
+        }
+        return forward.toString().equals(word) || forward.reverse().toString().equals(word)
+                || backward.toString().equals(word) || backward.reverse().toString().equals(word);
     }
 }

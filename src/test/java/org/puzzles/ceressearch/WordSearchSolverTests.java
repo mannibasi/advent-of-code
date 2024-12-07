@@ -40,4 +40,16 @@ public class WordSearchSolverTests {
         WordSearchSolver wordSearchSolver = new WordSearchSolver(board);
         assertEquals(1, wordSearchSolver.find("XMAS"));
     }
+
+    @Test
+    public void testWordFoundInFirstColumnInReverse() {
+        char[][] board = {
+                {'S', 'A', 'A', 'X'},
+                {'A', 'F', 'C', 'S'},
+                {'M', 'X', 'A', 'I'},
+                {'X', 'S', 'E', 'O'}
+        };
+        WordSearchSolver wordSearchSolver = new WordSearchSolver(board);
+        assertEquals(1, wordSearchSolver.find("XMAS"));
+    }
 }
