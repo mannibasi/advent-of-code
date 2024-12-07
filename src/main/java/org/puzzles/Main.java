@@ -35,7 +35,7 @@ public class Main {
         for (String instruction : instructions) {
             total += calculator.calculate(instruction);
         }
-        System.out.println("Multiplication instruction total: " + total); //162813399
+        System.out.println("Multiplication instruction total: " + total); //162813399; part 2: 53783319
     }
 
     private static void redNosedReports() {

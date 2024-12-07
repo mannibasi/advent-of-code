@@ -17,9 +17,18 @@ public class CorruptedInstructionProcessor {
         List<String> matches = new ArrayList<>();
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(corruptedInstructions);
+        int lastEnabledInstructionIndex = 0;
         while (matcher.find()) {
-            matches.add(matcher.group());
+            if(isInstructionEnabled(lastEnabledInstructionIndex, matcher.start())) {
+                matches.add(matcher.group());
+                lastEnabledInstructionIndex = matcher.end();
+            }
         }
         return matches;
+    }
+
+    private boolean isInstructionEnabled(int lastEnabledInstruction, int startOfCurrentInstruction) {
+        String instructionSegment = corruptedInstructions.substring(lastEnabledInstruction, startOfCurrentInstruction);
+        return instructionSegment.lastIndexOf("do()") >= instructionSegment.lastIndexOf("don't()");
     }
 }
