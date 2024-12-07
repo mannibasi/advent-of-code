@@ -3,16 +3,39 @@ package org.puzzles;
 import org.puzzles.historianhysteria.DistanceCalculator;
 import org.puzzles.historianhysteria.LocationListReader;
 import org.puzzles.historianhysteria.SimilarityCalculator;
+import org.puzzles.mullitover.Calculator;
+import org.puzzles.mullitover.CorruptedInstructionProcessor;
 import org.puzzles.rednosedreports.ReportProcessor;
 import org.puzzles.rednosedreports.ReportReader;
 import org.puzzles.rednosedreports.SafetyProcessor;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
         historianHysteria();
         redNosedReports();
+        mullItOver();
+    }
+
+    private static void mullItOver() {
+        String corruptedInstructions;
+        try {
+            corruptedInstructions = Files.readAllLines(Path.of("src/main/resources/org/puzzles/mullitover/day_3_puzzle_input")).toString();
+        } catch (IOException e) {
+            throw new RuntimeException("Error reading day 3 input file", e);
+        }
+        Calculator calculator = new Calculator();
+        CorruptedInstructionProcessor processor = new CorruptedInstructionProcessor(corruptedInstructions);
+        List<String> instructions = processor.getMultiplicationInstructions();
+        int total = 0;
+        for (String instruction : instructions) {
+            total += calculator.calculate(instruction);
+        }
+        System.out.println("Multiplication instruction total: " + total); //162813399
     }
 
     private static void redNosedReports() {
