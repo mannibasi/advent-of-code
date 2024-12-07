@@ -6,9 +6,21 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class WordSearchSolverTests {
     @Test
-    public void testWordFoundFirstRow() {
+    public void testWordFoundInFirstRow() {
         char[][] board = {
                 {'X', 'M', 'A', 'S'},
+                {'S', 'F', 'C', 'S'},
+                {'A', 'X', 'A', 'I'},
+                {'M', 'S', 'E', 'O'}
+        };
+        WordSearchSolver wordSearchSolver = new WordSearchSolver(board);
+        assertEquals(1, wordSearchSolver.find("XMAS"));
+    }
+
+    @Test
+    public void testWordFoundInFirstRowInReverse() {
+        char[][] board = {
+                {'S', 'A', 'M', 'X'},
                 {'S', 'F', 'C', 'S'},
                 {'A', 'X', 'A', 'I'},
                 {'M', 'S', 'E', 'O'}
