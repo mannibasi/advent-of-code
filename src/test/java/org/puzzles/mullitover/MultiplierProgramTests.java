@@ -32,4 +32,15 @@ public class MultiplierProgramTests {
             () -> assertEquals("mul(8,5)", instructions.get(3))
         );
     }
+
+    @Test
+    public void testCorruptedMemoryInstructionProcessorReturnsMultiplicationInstructionsWithConditionals() {
+        CorruptedInstructionProcessor processor = new CorruptedInstructionProcessor("xmul(2,4)&mul[3,7]!^don't()_mul(5,5)+mul(32,64](mul(11,8)undo()?mul(8,5))");
+        List<String> instructions = processor.getMultiplicationInstructions();
+        assertAll(
+                () -> assertEquals(2, instructions.size()),
+                () -> assertEquals("mul(2,4)", instructions.get(0)),
+                () -> assertEquals("mul(8,5)", instructions.get(1))
+        );
+    }
 }
