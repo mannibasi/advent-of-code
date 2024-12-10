@@ -64,4 +64,16 @@ public class WordSearchSolverTests {
         WordSearchSolver wordSearchSolver = new WordSearchSolver(board);
         assertEquals(4, wordSearchSolver.find("XMAS"));
     }
+
+    @Test
+    public void testWordFoundDiagonally() {
+        char[][] board = {
+                {'S', 'M', 'A', 'A'},
+                {'M', 'A', 'C', 'A'},
+                {'A', 'F', 'M', 'M'},
+                {'S', 'A', 'A', 'X'}
+        };
+        WordSearchSolver wordSearchSolver = new WordSearchSolver(board);
+        assertEquals(1, wordSearchSolver.find("XMAS"));
+    }
 }
