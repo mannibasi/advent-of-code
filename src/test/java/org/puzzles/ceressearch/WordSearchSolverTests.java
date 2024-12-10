@@ -52,4 +52,16 @@ public class WordSearchSolverTests {
         WordSearchSolver wordSearchSolver = new WordSearchSolver(board);
         assertEquals(1, wordSearchSolver.find("XMAS"));
     }
+
+    @Test
+    public void testWordsFoundOverlappingVerticallyAndHorizontally() {
+        char[][] board = {
+                {'X', 'M', 'A', 'S'},
+                {'M', 'X', 'C', 'A'},
+                {'A', 'F', 'X', 'M'},
+                {'S', 'A', 'M', 'X'}
+        };
+        WordSearchSolver wordSearchSolver = new WordSearchSolver(board);
+        assertEquals(4, wordSearchSolver.find("XMAS"));
+    }
 }

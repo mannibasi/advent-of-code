@@ -2,30 +2,29 @@ package org.puzzles.ceressearch;
 
 public class WordSearchSolver {
     private final char[][] board;
+    private int numberOfTimesWordFound;
 
     public WordSearchSolver(char[][] board) {
         this.board = board;
     }
 
     public int find(String word) {
-        int numberOfTimesWordFound = 0;
+        numberOfTimesWordFound = 0;
         for (int row = 0; row < board.length; row++) {
             for (int col = 0; col < board[row].length; col++) {
-                if(board[row][col] == word.charAt(0)) {
-                    if (searchWord(row, col, word)) {
-                        numberOfTimesWordFound++;
-                    }
-                }
+                searchWord(row, col, word);
             }
         }
         return numberOfTimesWordFound;
     }
 
-    private boolean searchWord(int row, int col, String word) {
-        return foundAcross(row, col, word) || foundDown(row, col, word) || foundDiagonal(row, col, word);
+    private void searchWord(int row, int col, String word) {
+        findHorizontally(row, col, word);
+        findVertically(row, col, word);
+        foundDiagonally(row, col, word);
     }
 
-    private boolean foundAcross(int row, int col, String word) {
+    private void findHorizontally(int row, int col, String word) {
         StringBuilder forward = new StringBuilder();
         StringBuilder backward = new StringBuilder();
         for (int i = 0; i < word.length(); i++) {
@@ -36,15 +35,19 @@ public class WordSearchSolver {
                 backward.append(board[row][col - i]);
             }
         }
-        return forward.toString().equals(word) || forward.reverse().toString().equals(word)
-                || backward.toString().equals(word) || backward.reverse().toString().equals(word);
+
+        if (forward.toString().equals(word)) {
+            numberOfTimesWordFound++;
+        }
+        if (backward.toString().equals(word)) {
+            numberOfTimesWordFound++;
+        }
     }
 
-    private boolean foundDiagonal(int row, int col, String word) {
-        return false;
+    private void foundDiagonally(int row, int col, String word) {
     }
 
-    private boolean foundDown(int row, int col, String word) {
+    private void findVertically(int row, int col, String word) {
         StringBuilder forward = new StringBuilder();
         StringBuilder backward = new StringBuilder();
         for (int i = 0; i < word.length(); i++) {
@@ -55,7 +58,11 @@ public class WordSearchSolver {
                 backward.append(board[row - i][col]);
             }
         }
-        return forward.toString().equals(word) || forward.reverse().toString().equals(word)
-                || backward.toString().equals(word) || backward.reverse().toString().equals(word);
+        if (forward.toString().equals(word)) {
+            numberOfTimesWordFound++;
+        }
+        if (backward.toString().equals(word)) {
+            numberOfTimesWordFound++;
+        }
     }
 }
