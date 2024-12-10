@@ -45,6 +45,37 @@ public class WordSearchSolver {
     }
 
     private void foundDiagonally(int row, int col, String word) {
+        StringBuilder ne = new StringBuilder();
+        StringBuilder se = new StringBuilder();
+        StringBuilder sw = new StringBuilder();
+        StringBuilder nw = new StringBuilder();
+        for (int i = 0; i < word.length(); i++) {
+            if((row + i) < board.length && (col + i) < board[row].length) {
+                ne.append(board[row + i][col + i]);
+            }
+            if((row - i) >= 0 && (col + i) < board[row].length) {
+                se.append(board[row - i][col + i]);
+            }
+            if((row - i) >= 0 && (col - i) >= 0) {
+                sw.append(board[row - i][col - i]);
+            }
+            if((row + i) < board.length && (col - i) >= 0) {
+                nw.append(board[row + i][col - i]);
+            }
+        }
+
+        if (ne.toString().equals(word)) {
+            numberOfTimesWordFound++;
+        }
+        if (se.toString().equals(word)) {
+            numberOfTimesWordFound++;
+        }
+        if (sw.toString().equals(word)) {
+            numberOfTimesWordFound++;
+        }
+        if (nw.toString().equals(word)) {
+            numberOfTimesWordFound++;
+        }
     }
 
     private void findVertically(int row, int col, String word) {
