@@ -112,4 +112,22 @@ public class WordSearchSolverTests {
         WordSearchSolver wordSearchSolver = new WordSearchSolver(board);
         assertEquals(18, wordSearchSolver.find("XMAS"));
     }
+
+    @Test
+    public void testExampleWordCrossesPuzzleWithOnlyInvolvedLetters() {
+        char[][] board = {
+                {'.','M','.','S','.','.','.','.','.','.'},
+                {'.','.','A','.','.','M','S','M','S','.'},
+                {'.','M','.','S','.','M','A','A','.','.'},
+                {'.','.','A','.','A','S','M','S','M','.'},
+                {'.','M','.','S','.','M','.','.','.','.'},
+                {'.','.','.','.','.','.','.','.','.','.'},
+                {'S','.','S','.','S','.','S','.','S','.'},
+                {'.','A','.','A','.','A','.','A','.','.'},
+                {'M','.','M','.','M','.','M','.','M','.'},
+                {'.','.','.','.','.','.','.','.','.','.'}
+        };
+        WordSearchSolver wordSearchSolver = new WordSearchSolver(board);
+        assertEquals(9, wordSearchSolver.findCrosses("MAS"));
+    }
 }
