@@ -1,5 +1,6 @@
 package org.puzzles;
 
+import org.puzzles.ceressearch.WordSearchSolver;
 import org.puzzles.historianhysteria.DistanceCalculator;
 import org.puzzles.historianhysteria.LocationListReader;
 import org.puzzles.historianhysteria.SimilarityCalculator;
@@ -19,6 +20,21 @@ public class Main {
         historianHysteria();
         redNosedReports();
         mullItOver();
+        ceresSearch();
+    }
+
+    private static void ceresSearch() {
+        char[][] board;
+        try {
+            board = Files.readAllLines(Path.of("src/main/resources/org/puzzles/ceressearch/day_4_puzzle_input"))
+                    .stream()
+                    .map(String::toCharArray)
+                    .toArray(char[][]::new);
+        } catch (IOException e) {
+            throw new RuntimeException("Error reading day 4 word search puzzle input file", e);
+        }
+        WordSearchSolver wordSearchSolver = new WordSearchSolver(board);
+        System.out.println("Word count: " + wordSearchSolver.find("XMAS")); //2458
     }
 
     private static void mullItOver() {
