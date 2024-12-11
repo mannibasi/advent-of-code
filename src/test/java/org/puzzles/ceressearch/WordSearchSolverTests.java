@@ -89,7 +89,25 @@ public class WordSearchSolverTests {
                 {'S', 'M', 'S', 'M', 'S', 'A', 'S', 'X', 'S', 'S'},
                 {'S', 'A', 'X', 'A', 'M', 'A', 'S', 'A', 'A', 'A'},
                 {'M', 'A', 'M', 'M', 'M', 'X', 'M', 'M', 'M', 'M'},
-                {'M', 'X', 'M', 'X', 'A', 'M', 'A', 'S', 'X', 'X'}
+                {'M', 'X', 'M', 'X', 'A', 'X', 'M', 'A', 'S', 'X'}
+        };
+        WordSearchSolver wordSearchSolver = new WordSearchSolver(board);
+        assertEquals(18, wordSearchSolver.find("XMAS"));
+    }
+
+    @Test
+    public void testExamplePuzzleWithOnlyInvolvedLetters() {
+        char[][] board = {
+                {'.', '.', '.', '.', 'X', 'X', 'M', 'A', 'S', '.'},
+                {'.', 'S', 'A', 'M', 'X', 'M', 'S', '.', '.', '.'},
+                {'.', '.', '.', 'S', '.', '.', 'A', '.', '.', '.'},
+                {'.', '.', 'A', '.', 'A', '.', 'M', 'S', '.', 'X'},
+                {'X', 'M', 'A', 'S', 'A', 'M', 'X', '.', 'M', 'M'},
+                {'X', '.', '.', '.', '.', '.', 'X', 'A', '.', 'A'},
+                {'S', '.', 'S', '.', 'S', '.', 'S', '.', 'S', 'S'},
+                {'.', 'A', '.', 'A', '.', 'A', '.', 'A', '.', 'A'},
+                {'.', '.', 'M', '.', 'M', '.', 'M', '.', 'M', 'M'},
+                {'.', 'X', '.', 'X', '.', 'X', 'M', 'A', 'S', 'X'}
         };
         WordSearchSolver wordSearchSolver = new WordSearchSolver(board);
         assertEquals(18, wordSearchSolver.find("XMAS"));
