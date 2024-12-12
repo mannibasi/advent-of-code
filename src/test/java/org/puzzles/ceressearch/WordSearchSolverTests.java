@@ -130,4 +130,26 @@ public class WordSearchSolverTests {
         WordSearchSolver wordSearchSolver = new WordSearchSolver(board);
         assertEquals(9, wordSearchSolver.findCrosses("MAS"));
     }
+
+    @Test
+    public void testFindCrossesWithMasAndMas() {
+        char[][] board = {
+                {'M','.','S'},
+                {'.','A','.'},
+                {'M','.','S'}
+        };
+        WordSearchSolver wordSearchSolver = new WordSearchSolver(board);
+        assertEquals(1, wordSearchSolver.findCrosses("MAS"));
+    }
+
+    @Test
+    public void testFindCrossesWithMasAndSam() {
+        char[][] board = {
+                {'M','.','M'},
+                {'.','A','.'},
+                {'S','.','S'}
+        };
+        WordSearchSolver wordSearchSolver = new WordSearchSolver(board);
+        assertEquals(1, wordSearchSolver.findCrosses("MAS"));
+    }
 }
