@@ -24,59 +24,58 @@ public class Main {
     }
 
     private static void ceresSearch() {
-        char[][] board;
-        try {
-            board = Files.readAllLines(Path.of("src/main/resources/org/puzzles/ceressearch/day_4_puzzle_input"))
-                    .stream()
-                    .map(String::toCharArray)
-                    .toArray(char[][]::new);
-        } catch (IOException e) {
-            throw new RuntimeException("Error reading day 4 word search puzzle input file", e);
-        }
+        char[][] board = readBoardFromFile("src/main/resources/org/puzzles/ceressearch/day_4_puzzle_input");
         WordSearchSolver wordSearchSolver = new WordSearchSolver(board);
-        System.out.println("Word count: " + wordSearchSolver.find("XMAS")); //2458
-        System.out.println("Word cross count: " + wordSearchSolver.findCrosses("MAS")); //1945
+        System.out.println("Word count: " + wordSearchSolver.find("XMAS"));
+        System.out.println("Word cross count: " + wordSearchSolver.findCrosses("MAS"));
     }
 
     private static void mullItOver() {
-        String corruptedInstructions;
-        try {
-            corruptedInstructions = Files.readAllLines(Path.of("src/main/resources/org/puzzles/mullitover/day_3_puzzle_input")).toString();
-        } catch (IOException e) {
-            throw new RuntimeException("Error reading day 3 input file", e);
-        }
+        String corruptedInstructions = readFileAsString("src/main/resources/org/puzzles/mullitover/day_3_puzzle_input");
         Calculator calculator = new Calculator();
         CorruptedInstructionProcessor processor = new CorruptedInstructionProcessor(corruptedInstructions);
-        List<String> instructions = processor.getMultiplicationInstructions();
-        int total = 0;
-        for (String instruction : instructions) {
-            total += calculator.calculate(instruction);
-        }
-        System.out.println("Multiplication instruction total: " + total); //162813399; part 2: 53783319
+        int total = processor.getMultiplicationInstructions().stream()
+                .mapToInt(calculator::calculate)
+                .sum();
+        System.out.println("Multiplication instruction total: " + total);
     }
 
     private static void redNosedReports() {
         ReportReader reader = new ReportReader("src/main/resources/org/puzzles/rednosedreports/day_2_puzzle_input");
         List<String> reports = reader.readReports();
-        int safeReportCount = 0;
-        for (String report : reports) {
-            ReportProcessor processor = new ReportProcessor(report);
-            SafetyProcessor safetyProcessor = new SafetyProcessor(processor.readLevels());
-            if(safetyProcessor.isSafe()) {
-                safeReportCount++;
-            }
-        }
-        System.out.println("Safe report count: " + safeReportCount); //486
+        long safeReportCount = reports.stream()
+                .map(ReportProcessor::new)
+                .map(ReportProcessor::readLevels)
+                .map(SafetyProcessor::new)
+                .filter(SafetyProcessor::isSafe)
+                .count();
+        System.out.println("Safe report count: " + safeReportCount);
     }
 
     private static void historianHysteria() {
         LocationListReader reader = new LocationListReader("src/main/resources/org/puzzles/historianhysteria/day_1_puzzle_input");
-        DistanceCalculator calculator = new DistanceCalculator(reader.readListOne(), reader.readListTwo());
-        int distance = calculator.calculate();
-        System.out.println("Total distance: " + distance); //1223326
+        DistanceCalculator distanceCalculator = new DistanceCalculator(reader.readListOne(), reader.readListTwo());
+        System.out.println("Total distance: " + distanceCalculator.calculate());
 
         SimilarityCalculator similarityCalculator = new SimilarityCalculator(reader.readListOne(), reader.readListTwo());
-        int similarityScore = similarityCalculator.calculate();
-        System.out.println("Similarity score: " + similarityScore); //21070419
+        System.out.println("Similarity score: " + similarityCalculator.calculate());
+    }
+
+    private static char[][] readBoardFromFile(String filePath) {
+        try {
+            return Files.readAllLines(Path.of(filePath)).stream()
+                    .map(String::toCharArray)
+                    .toArray(char[][]::new);
+        } catch (IOException e) {
+            throw new RuntimeException("Error reading file: " + filePath, e);
+        }
+    }
+
+    private static String readFileAsString(String filePath) {
+        try {
+            return Files.readString(Path.of(filePath));
+        } catch (IOException e) {
+            throw new RuntimeException("Error reading file: " + filePath, e);
+        }
     }
 }
