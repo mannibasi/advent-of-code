@@ -35,6 +35,7 @@ public class Main {
         }
         WordSearchSolver wordSearchSolver = new WordSearchSolver(board);
         System.out.println("Word count: " + wordSearchSolver.find("XMAS")); //2458
+        System.out.println("Word cross count: " + wordSearchSolver.findCrosses("MAS")); //1945
     }
 
     private static void mullItOver() {
