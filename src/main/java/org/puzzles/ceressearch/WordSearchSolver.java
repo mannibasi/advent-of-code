@@ -96,4 +96,38 @@ public class WordSearchSolver {
             numberOfTimesWordFound++;
         }
     }
+
+    public int findCrosses(String word) {
+        numberOfTimesWordFound = 0;
+        for (int row = 0; row < board.length; row++) {
+            for (int col = 0; col < board[row].length; col++) {
+                if(board[row][col] == 'A') {
+                    if(row + 1 < board.length && row - 1 >= 0 && col + 1 < board[row].length && col - 1 >= 0) {
+                        findCross(row, col, word.charAt(0), word.charAt(2));
+                    }
+                }
+            }
+        }
+        return numberOfTimesWordFound;
+    }
+
+    private void findCross(int row, int col, char first, char third) {
+        if(board[row - 1][col - 1] == first & board[row + 1][col + 1] == third
+                && board[row + 1][col - 1] == first && board[row - 1][col + 1] == third) {
+            numberOfTimesWordFound++;
+        }
+
+        if(board[row - 1][col - 1] == first & board[row + 1][col + 1] == third
+                && board[row + 1][col - 1] == third && board[row - 1][col + 1] == first) {
+            numberOfTimesWordFound++;
+        }
+        if(board[row - 1][col - 1] == third & board[row + 1][col + 1] == first
+                && board[row + 1][col - 1] == first && board[row - 1][col + 1] == third) {
+            numberOfTimesWordFound++;
+        }
+        if(board[row - 1][col - 1] == third & board[row + 1][col + 1] == first
+                && board[row + 1][col - 1] == third && board[row - 1][col + 1] == first) {
+            numberOfTimesWordFound++;
+        }
+    }
 }
