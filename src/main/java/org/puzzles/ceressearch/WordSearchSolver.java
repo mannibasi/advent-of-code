@@ -101,7 +101,7 @@ public class WordSearchSolver {
         numberOfTimesWordFound = 0;
         for (int row = 0; row < board.length; row++) {
             for (int col = 0; col < board[row].length; col++) {
-                if(board[row][col] == 'A') {
+                if(board[row][col] == word.charAt(1)) {
                     if(row + 1 < board.length && row - 1 >= 0 && col + 1 < board[row].length && col - 1 >= 0) {
                         findCross(row, col, word.charAt(0), word.charAt(2));
                     }
