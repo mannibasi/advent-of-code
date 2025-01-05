@@ -8,6 +8,6 @@ public class PageSorter {
     }
 
     public List<Integer> sortPages(LinkedList<Integer> pagesUpdates) {
-        return null;
+        return pagesUpdates;
     }
 }
